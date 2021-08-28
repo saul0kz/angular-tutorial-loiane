@@ -1,3 +1,4 @@
+import { CursoDetalheComponent } from './curso-detalhe/curso-detalhe.component';
 import { CursosComponent } from './cursos/cursos.component';
 import { LoginComponent } from './login/login.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -8,6 +9,7 @@ const APP_ROUTES: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'cursos', component: CursosComponent },
+  { path: 'curso/:id', component: CursoDetalheComponent },
 ];
 
 export const routing: ModuleWithProviders<any> = RouterModule.forRoot(APP_ROUTES);
