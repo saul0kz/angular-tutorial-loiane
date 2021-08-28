@@ -14,11 +14,9 @@ export class CursoDetalheComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {}
 
-  getParams = (params: Params) => {
+  subscription: Subscription = this.route.params.subscribe((params: Params) => {
     this.id = params.id;
-  };
-
-  subscription: Subscription = this.route.params.subscribe(this.getParams);
+  });
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
