@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   constructor() { }
+  queryParams = {pagina: 1};
 
   ngOnInit(): void {
   }
