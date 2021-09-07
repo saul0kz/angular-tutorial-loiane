@@ -1,3 +1,4 @@
+import { AlunosModule } from './alunos/alunos.module';
 import { CursosModule } from './cursos/cursos.module';
 import { CursosService } from './cursos/cursos.service';
 import { NgModule } from '@angular/core';
@@ -11,7 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, LoginComponent, HeaderComponent, NaoEncontradoComponent],
-  imports: [BrowserModule,  AppRoutingModule, CursosModule],
+  imports: [BrowserModule,  AppRoutingModule, CursosModule, AlunosModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
