@@ -8,8 +8,8 @@ import { CursosComponent } from './cursos.component';
 
 
 const APP_ROUTES: Routes = [
-  { path: 'cursos', component: CursosComponent },
-  { path: 'curso/:id', component: CursoDetalheComponent },
+  { path: '', component: CursosComponent },
+  { path: ':id', component: CursoDetalheComponent },
   { path: 'nao-encontrado', component: NaoEncontradoComponent },
 ];
 

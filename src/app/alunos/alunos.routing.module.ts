@@ -9,7 +9,7 @@ import { AlunosComponent } from './alunos/alunos.component';
 
 
 const APP_ROUTES: Routes = [
-                    {path: 'alunos', component: AlunosComponent, children : [
+                    {path: '', component: AlunosComponent, children : [
                       {path: 'novo', component: AlunoFormComponent},
                       {path: ':id', component: AlunoDetalheComponent},
                       {path: ':id/editar', component: AlunoFormComponent},

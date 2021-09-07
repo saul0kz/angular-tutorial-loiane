@@ -1,6 +1,3 @@
-import { AlunosModule } from './alunos/alunos.module';
-import { CursosModule } from './cursos/cursos.module';
-import { CursosService } from './cursos/cursos.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
@@ -11,8 +8,14 @@ import { NaoEncontradoComponent } from './nao-encontrado/nao-encontrado.componen
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, HeaderComponent, NaoEncontradoComponent],
-  imports: [BrowserModule,  AppRoutingModule, CursosModule, AlunosModule],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    LoginComponent,
+    HeaderComponent,
+    NaoEncontradoComponent,
+  ],
+  imports: [BrowserModule, AppRoutingModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
