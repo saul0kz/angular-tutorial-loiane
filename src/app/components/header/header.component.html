@@ -1,9 +1,9 @@
-<nav>
+<nav *ngIf="mostrarMenu">
   <div class="nav-wrapper">
-    <a href="#" routerLink="" class="brand-logo right">Home</a>
+    <a (click)='logout()' routerLink="" class="brand-logo right">Logout</a>
     <ul id="nav-mobile" class="left hide-on-med-and-down">
       <li routerLinkActive="active">
-        <a routerLink="/login">Login</a>
+        <a routerLink="/">Login</a>
       </li>
       <li routerLinkActive="active">
         <a [queryParams]=queryParams routerLink="/curso">Cursos</a>

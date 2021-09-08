@@ -1,16 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Usuario } from './../../models/usuario/Usuario';
+import { AuthService } from './../../services/auth.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
-  constructor() { }
-  queryParams = {pagina: 1};
+  queryParams = { pagina: 1 };
+  mostrarMenu: boolean = false;
 
-  ngOnInit(): void {
+
+  constructor(private authService: AuthService) {
+    this.authService.mostrarMenuEmitter.subscribe(
+      (mostrarMenu) => (this.mostrarMenu = mostrarMenu)
+    );
+  }
+  ngOnDestroy(): void {
+    this.authService.mostrarMenuEmitter.unsubscribe();
+  }
+  logout() {
+    this.authService.logout();
+
   }
 
+
+  ngOnInit(): void {}
 }
