@@ -1,3 +1,4 @@
+import { AlunoDeactivateGuard } from './../guards/aluno-deactivate.guard';
 import { AlunoFormComponent } from './aluno-form/aluno-form.component';
 import { AlunoDetalheComponent } from './aluno-detalhe/aluno-detalhe.component';
 
@@ -12,7 +13,7 @@ const APP_ROUTES: Routes = [
                     {path: '', component: AlunosComponent, children : [
                       {path: 'novo', component: AlunoFormComponent},
                       {path: ':id', component: AlunoDetalheComponent},
-                      {path: ':id/editar', component: AlunoFormComponent},
+                      {path: ':id/editar', component: AlunoFormComponent, canDeactivate: [AlunoDeactivateGuard]},
                     ]},
 
                     ];

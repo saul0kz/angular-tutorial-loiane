@@ -23,6 +23,9 @@ export class AlunoFormComponent implements OnInit {
       this.aluno = this.alunosService.getAlunoById(id);
     }
   );
+  podeMudarRota() {
+    return confirm('Pode mudar rota?');
+  }
 
   ngOnInit(): void {}
   ngOnDestroy(): void {
