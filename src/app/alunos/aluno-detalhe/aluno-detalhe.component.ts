@@ -16,10 +16,17 @@ export class AlunoDetalheComponent implements OnInit, OnDestroy {
   ) {}
 
   public aluno: Aluno | undefined;
+  /*
   private subscription: Subscription = this.activatedRoute.params.subscribe(
     (params) => {
       const id = Number(params.id);
       this.aluno = this.alunosService.getAlunoById(id);
+    }
+  );
+  */
+  private subscription: Subscription = this.activatedRoute.data.subscribe(
+    (info) => {
+      this.aluno = info.aluno;
     }
   );
 
