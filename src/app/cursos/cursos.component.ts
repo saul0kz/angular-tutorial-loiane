@@ -24,7 +24,7 @@ export class CursosComponent implements OnInit, OnDestroy {
     this.cursos = this.cursosService.getCursos();
   }
   proximaPagina() {
-    this.router.navigate(['/cursos'], {queryParams: {'pagina': ++this.pagina} })
+    this.router.navigate(['/curso'], {queryParams: {'pagina': ++this.pagina} })
   }
 
   ngOnDestroy(): void {

@@ -12,7 +12,8 @@ export class AlunosService {
   public getAlunos(): Aluno[] {
     return this.alunos;
   }
-  public getAlunoById(id: number) {
-    return this.alunos.find((aluno) => aluno.id === id);
+  public getAlunoById(id: number): Aluno {
+    let aluno = this.alunos[id - 1];
+    return aluno;
   }
 }

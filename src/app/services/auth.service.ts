@@ -15,7 +15,7 @@ export class AuthService {
   public logarUsuario(usuario: Usuario) {
     this.isLogado = true;
     this.mostrarMenuEmitter.emit(this.isLogado);
-    this.router.navigate(['/cursos']);
+    this.router.navigate(['/curso'], {queryParams: {'pagina': 1}});
   }
   public logout() {
     this.isLogado = false;

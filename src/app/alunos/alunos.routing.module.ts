@@ -1,3 +1,4 @@
+import { AlunoResolver } from './../guards/aluno.resolver';
 import { AlunoDeactivateGuard } from './../guards/aluno-deactivate.guard';
 import { AlunoFormComponent } from './aluno-form/aluno-form.component';
 import { AlunoDetalheComponent } from './aluno-detalhe/aluno-detalhe.component';
