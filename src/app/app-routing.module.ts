@@ -9,13 +9,15 @@ const APP_ROUTES: Routes = [
     path: 'curso',
     loadChildren: () =>
       import('./cursos/cursos.module').then((m) => m.CursosModule),
-      canActivate: [AuthGuard]
+      canActivate: [AuthGuard],
+      canLoad: [AuthGuard],
   },
   {
     path: 'alunos',
     loadChildren: () =>
       import('./alunos/alunos.module').then((m) => m.AlunosModule),
-      canActivate: [AuthGuard]
+      canActivate: [AuthGuard],
+      canLoad: [AuthGuard],
   },
   { path: '', component: LoginComponent },
   { path: 'nao-encontrado', component: NaoEncontradoComponent },
