@@ -1,3 +1,4 @@
+import { Error404Component } from './error404/error404.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -21,6 +22,7 @@ const APP_ROUTES: Routes = [
   },
   { path: '', component: LoginComponent },
   { path: 'nao-encontrado', component: NaoEncontradoComponent },
+  { path: '**', component: Error404Component },
 ];
 
 @NgModule({

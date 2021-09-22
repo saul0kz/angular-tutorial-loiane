@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NaoEncontradoComponent } from './nao-encontrado/nao-encontrado.component';
 import { AppRoutingModule } from './app-routing.module';
+import { Error404Component } from './error404/error404.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
     LoginComponent,
     HeaderComponent,
     NaoEncontradoComponent,
+    Error404Component,
   ],
   imports: [BrowserModule, AppRoutingModule],
   bootstrap: [AppComponent],
