@@ -1,6 +1,6 @@
-# Rotas
+# Angular Tutorial
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.1.
+Exercícios do curso de Angular ministrado por [Loiane Groner](https://loiane.training) version 12.1.1.
 
 ## Development server
 
