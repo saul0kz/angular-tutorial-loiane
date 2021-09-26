@@ -20,6 +20,20 @@ const APP_ROUTES: Routes = [
       canActivate: [AuthGuard],
       canLoad: [AuthGuard],
   },
+  {
+    path: 'data-driven',
+    loadChildren: () =>
+      import('./data-driven/data-driven.module').then((m) => m.DataDrivenModule),
+      canActivate: [AuthGuard],
+      canLoad: [AuthGuard],
+  },
+  {
+    path: 'template-driven',
+    loadChildren: () =>
+      import('./template-driven/template-driven.module').then((m) => m.TemplateDrivenModule),
+      canActivate: [AuthGuard],
+      canLoad: [AuthGuard],
+  },
   { path: '', component: LoginComponent },
   { path: 'nao-encontrado', component: NaoEncontradoComponent },
   { path: '**', component: Error404Component },
