@@ -8,12 +8,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-
   queryParams = { pagina: 1 };
   mostrarMenu: boolean = false;
 
-
   constructor(private authService: AuthService) {
+    this.mostrarMenu = this.authService.getIsLogado();
     this.authService.mostrarMenuEmitter.subscribe(
       (mostrarMenu) => (this.mostrarMenu = mostrarMenu)
     );
@@ -23,9 +22,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
   logout() {
     this.authService.logout();
-
   }
-
 
   ngOnInit(): void {}
 }

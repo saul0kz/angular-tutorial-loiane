@@ -9,7 +9,7 @@ import { Usuario } from '../models/usuario/Usuario';
 })
 export class LoginComponent implements OnInit {
 
-  usuario: Usuario = {password: 'Saulo', email: 'email'};
+  usuario: Usuario = {password: 'Saulo', nome:'', email: 'email'};
   constructor(private authService : AuthService) { }
 
   ngOnInit(): void {

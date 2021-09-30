@@ -10,7 +10,7 @@ export class AuthService {
   public mostrarMenuEmitter: EventEmitter<any> = new EventEmitter();
   constructor(private router: Router) {}
 
-  private isLogado : boolean = false;
+  private isLogado : boolean = true;
 
   public logarUsuario(usuario: Usuario) {
     this.isLogado = true;
