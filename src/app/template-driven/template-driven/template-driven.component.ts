@@ -11,7 +11,7 @@ export class TemplateDrivenComponent implements OnInit {
   constructor() {}
 
   usuario: Usuario = {
-    nome: 'saulo',
+    nome: undefined,
     email: 'saul0kz@gmail.com',
     password: '',
   };
@@ -19,6 +19,6 @@ export class TemplateDrivenComponent implements OnInit {
   ngOnInit(): void {}
   onSubmit(f: NgForm) {
     console.log(this.usuario);
-    console.log(f);
+    console.log(f.controls);
   }
 }

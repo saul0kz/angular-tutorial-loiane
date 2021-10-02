@@ -4,18 +4,22 @@
       <label for="nome">Nome</label>
       <input type="text" class="form-control" name="nome"
       id="nome" placeholder="Nome" [ngModel]="usuario.nome"
-      required #nome>
-      <div>
-        {{ nome.className }}
-      </div>
+      required #nome="ngModel">
+    </div>
+    <div class="alert alert-danger" role="alert" *ngIf="!nome.valid && nome.touched">
+       Nome é obrigatório
     </div>
 
     <div class="form-group">
       <label for="email">Email</label>
       <input type="email" class="form-control" name="email"
-      id="email" placeholder="nome@email.com" [ngModel]="usuario.email"
-      required email>
+      id="email" place
+      holder="nome@email.com" [ngModel]="usuario.email"
+      required email #email="ngModel">
+      <div class="alert alert-danger" role="alert" *ngIf="!email.valid && nome.touched">
+        Nome é obrigatório
+     </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button [disabled]="f.invalid" type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
