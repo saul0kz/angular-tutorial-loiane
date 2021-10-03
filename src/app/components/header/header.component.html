@@ -1,25 +1,29 @@
-<nav *ngIf="mostrarMenu">
-  <div class="nav-wrapper">
-    <a (click)='logout()' routerLink="" class="brand-logo right">Logout</a>
-    <ul id="nav-mobile" class="left hide-on-med-and-down">
-      <li routerLinkActive="active">
-        <a routerLink="/">Login</a>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Curso Angular</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li routerLinkActive="active">
-        <a [queryParams]=queryParams routerLink="/curso">Cursos</a>
+      <li class="nav-item">
+        <a  class="nav-link" [queryParams]=queryParams routerLink="/curso">Cursos</a>
       </li>
-      <li routerLinkActive="active">
-        <a routerLink="/curso/1">Curso 1</a>
+      <li class="nav-item">
+        <a  class="nav-link" routerLink="/alunos">Alunos</a>
       </li>
-      <li routerLinkActive="active">
-        <a routerLink="/alunos">Alunos</a>
+      <li class="nav-item">
+        <a  class="nav-link" routerLink="/data-driven">Data Driven</a>
       </li>
-      <li routerLinkActive="active">
-        <a routerLink="/data-driven">Data driven</a>
+      <li class="nav-item">
+        <a  class="nav-link" routerLink="/template-driven">Template Driven</a>
       </li>
-      <li routerLinkActive="active">
-        <a routerLink="/template-driven">Template driven</a>
-      </li>
+
     </ul>
+
   </div>
 </nav>

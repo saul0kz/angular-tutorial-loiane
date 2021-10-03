@@ -4,6 +4,7 @@ import { templateDrivenRoutingModule } from './template-driven.routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TemplateDrivenComponent } from './template-driven/template-driven.component';
+import { MaterializeCommonModule, MaterializeInputModule } from 'materialize-angular';
 
 @NgModule({
   declarations: [
@@ -11,6 +12,8 @@ import { TemplateDrivenComponent } from './template-driven/template-driven.compo
 
   ],
   imports: [
+    MaterializeCommonModule,
+    MaterializeInputModule,
     CommonModule,
     FormsModule,
     templateDrivenRoutingModule,

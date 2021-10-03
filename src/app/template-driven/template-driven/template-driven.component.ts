@@ -10,6 +10,12 @@ import { Usuario } from 'src/app/models/usuario/Usuario';
 export class TemplateDrivenComponent implements OnInit {
   constructor() {}
 
+  model = {
+    left: true,
+    middle: false,
+    right: false
+  };
+
   usuario: Usuario = {
     nome: undefined,
     email: 'saul0kz@gmail.com',
