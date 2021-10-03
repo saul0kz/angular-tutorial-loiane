@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 import { Usuario } from 'src/app/models/usuario/Usuario';
 
 @Component({
@@ -26,5 +26,8 @@ export class TemplateDrivenComponent implements OnInit {
   onSubmit(f: NgForm) {
     console.log(this.usuario);
     console.log(f.controls);
+  }
+  public consultaCEP (cep: NgModel) {
+    console.log(cep.value);
   }
 }

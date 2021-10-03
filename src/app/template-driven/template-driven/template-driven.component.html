@@ -33,10 +33,13 @@
     </div>
   </div>
 
+  <div ngModelGroup="endereco">
+
     <div class="form-row">
       <div class="form-group col-md-3">
         <label for="cep" class="control-label">CEP</label>
         <input
+
           type="text"
           class="form-control"
           id="cep"
@@ -44,6 +47,7 @@
           ngModel
           required
           #cep="ngModel"
+          (blur) = "consultaCEP(cep)"
         />
       </div>
 
@@ -129,6 +133,7 @@
         />
       </div>
     </div>
+  </div>
 
   <button type="submit" class="btn btn-primary" [disabled]="!f.valid">
     Submit
