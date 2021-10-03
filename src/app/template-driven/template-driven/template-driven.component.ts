@@ -1,6 +1,9 @@
+import { CepService } from './../../services/cep.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
 import { Usuario } from 'src/app/models/usuario/Usuario';
+import { Endereco } from 'src/app/models/endereco/endereco';
+import { FnParam } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-template-driven',
@@ -8,16 +11,16 @@ import { Usuario } from 'src/app/models/usuario/Usuario';
   styleUrls: ['./template-driven.component.scss'],
 })
 export class TemplateDrivenComponent implements OnInit {
-  constructor() {}
+  constructor(private cepService: CepService) {}
 
   model = {
     left: true,
     middle: false,
-    right: false
+    right: false,
   };
 
   usuario: Usuario = {
-    nome: undefined,
+    nome: '',
     email: 'saul0kz@gmail.com',
     password: '',
   };
@@ -27,7 +30,22 @@ export class TemplateDrivenComponent implements OnInit {
     console.log(this.usuario);
     console.log(f.controls);
   }
-  public consultaCEP (cep: NgModel) {
-    console.log(cep.value);
+  public consultaCEP(cep: NgModel, f: NgForm) {
+    this.cepService.getEndereco(cep.value).subscribe((dados) => {
+      const endereco: Endereco = JSON.parse(JSON.stringify(dados));
+      this.populaDadosForm(endereco, f);
+    });
+  }
+  populaDadosForm(dados: Endereco, form: NgForm) {
+    form.form.patchValue({
+      endereco: {
+        cep: dados.cep,
+        complemento: dados.complemento,
+        rua: dados.logradouro,
+        bairro: dados.bairro,
+        cidade: dados.localidade,
+        estado: dados.uf,
+      },
+    });
   }
 }

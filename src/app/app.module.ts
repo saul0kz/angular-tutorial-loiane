@@ -8,6 +8,7 @@ import { NaoEncontradoComponent } from './nao-encontrado/nao-encontrado.componen
 import { AppRoutingModule } from './app-routing.module';
 import { Error404Component } from './error404/error404.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NaoEncontradoComponent,
     Error404Component,
   ],
-  imports: [BrowserModule, AppRoutingModule, NgbModule],
+  imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

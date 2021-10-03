@@ -1,3 +1,4 @@
+import { CepService } from './../services/cep.service';
 import { FormDebugModule } from './../form-debug/form-debug.module';
 import { FormsModule } from '@angular/forms';
 import { templateDrivenRoutingModule } from './template-driven.routing.module';
@@ -11,6 +12,7 @@ import { MaterializeCommonModule, MaterializeInputModule } from 'materialize-ang
     TemplateDrivenComponent,
 
   ],
+  providers: [CepService],
   imports: [
     MaterializeCommonModule,
     MaterializeInputModule,
