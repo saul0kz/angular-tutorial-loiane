@@ -1,4 +1,4 @@
-import { NgForm } from '@angular/forms';
+import { FormGroup, NgForm } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -10,7 +10,7 @@ export class FormDebugComponent implements OnInit {
 
   constructor() { }
 
-  @Input() form : NgForm | undefined = undefined;
+  @Input() form : NgForm | FormGroup;
 
   ngOnInit(): void {
   }

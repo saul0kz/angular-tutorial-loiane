@@ -1,1 +1,27 @@
-<p>data-driven works!</p>
+<div class="container">
+  <form [formGroup]="form">
+    <div class="form-group">
+      <label for="nome">Nome:</label>
+      <input
+        type="nome"
+        class="form-control"
+        id="nome"
+        aria-describedby="nome"
+        placeholder="nome"
+        formControlName="nome"
+      />
+    </div>
+    <div class="form-group">
+      <label for="email">email</label>
+      <input
+        type="email"
+        class="form-control"
+        formControlName="email"
+        id="email"
+        placeholder="email"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <app-form-debug [form]="form"></app-form-debug>
+</div>

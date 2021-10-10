@@ -21,7 +21,7 @@ const APP_ROUTES: Routes = [
       canLoad: [AuthGuard],
   },
   {
-    path: 'data-driven',
+    path: '',
     loadChildren: () =>
       import('./data-driven/data-driven.module').then((m) => m.DataDrivenModule),
       canActivate: [AuthGuard],
