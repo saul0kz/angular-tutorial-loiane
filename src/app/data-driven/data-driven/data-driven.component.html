@@ -1,5 +1,5 @@
 <div class="container">
-  <form [formGroup]="form">
+  <form (ngSubmit)="submit()" [formGroup]="form">
     <div class="form-group">
       <label for="nome">Nome:</label>
       <input
@@ -11,6 +11,7 @@
         formControlName="nome"
       />
     </div>
+
     <div class="form-group">
       <label for="email">email</label>
       <input
@@ -21,7 +22,69 @@
         placeholder="email"
       />
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+
+
+
+    <div class="form-row">
+      <div class="col-sm-3">
+        <label for="nome">CEP:</label>
+        <input
+        [maxLength]=8
+        type="cep"
+        class="form-control"
+        id="cep"
+        aria-describedby="cep"
+        placeholder="cep"
+        formControlName="cep"
+      />
+      </div>
+      <div class="col">
+        <label for="nome">Rua:</label>
+        <input
+        type="rua"
+        class="form-control"
+        id="rua"
+        aria-describedby="rua"
+        placeholder="rua"
+        formControlName="rua"
+      />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="nome">Numero:</label>
+       <input
+        type="numero"
+        class="form-control"
+        id="numero"
+        aria-describedby="numero"
+        placeholder="numero"
+        formControlName="numero"
+      />
+      </div>
+      <div class="col">
+        <label for="nome">Complemento:</label>
+        <input
+        type="complemento"
+        class="form-control"
+        id="nome"
+        aria-describedby="complemento"
+        placeholder="complemento"
+        formControlName="complemento"
+      />
+      </div>
+    </div>
+
+    <div>
+      <button type="submit"  [disabled]="!form.valid" class="btn btn-primary">Submit</button>
+      <button type="button"  (click)="cancelar()" class="btn btn-secondary">
+        cancelar
+      </button>
+    </div>
   </form>
+  <div *ngIf="form.controls.email.errors">
+    {{ form.controls.email.errors | json }}
+  </div>
+
   <app-form-debug [form]="form"></app-form-debug>
 </div>
