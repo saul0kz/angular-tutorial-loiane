@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { ThrowStmt } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   Form,
   FormBuilder,
@@ -8,16 +8,32 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Cargo } from 'src/app/models/Cargo/cargo.model';
+import { Endereco } from 'src/app/models/endereco/endereco';
+import { Estado } from 'src/app/models/estado/estado.model';
+import { CepService } from 'src/app/services/cep.service';
+import { DropdownService } from 'src/app/services/dropdown.service';
 
 @Component({
   selector: 'app-data-driven',
   templateUrl: './data-driven.component.html',
   styleUrls: ['./data-driven.component.scss'],
 })
-export class DataDrivenComponent implements OnInit {
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
+export class DataDrivenComponent implements OnInit, OnDestroy {
+  constructor(
+    private formBuilder: FormBuilder,
+    private http: HttpClient,
+    private cepService: CepService,
+    private dropDownService: DropdownService
+  ) {}
+  ngOnDestroy(): void {
+    this.cepService.getEstados();
+  }
 
   form: FormGroup;
+  estados: Observable<Estado[]>;
+  cargos: Observable<Cargo[]>;
 
   ngOnInit(): void {
     /*
@@ -26,15 +42,32 @@ export class DataDrivenComponent implements OnInit {
       email: new FormControl(null),
     });
     */
+
+    this.estados = this.cepService.getEstados();
+    this.cargos = this.dropDownService.getCargos();
+
+    /*
+    this.cepService
+      .getEstados()
+      .subscribe((dados: Estado[]) => this.estados = dados);
+      */
+
     this.form = this.formBuilder.group({
       nome: ['Saulo', Validators.required],
       email: ['saul0kz@gmail.com', [Validators.required, Validators.email]],
-      cep:  ['49042570', Validators.required ],
-      numero:  [42, Validators.required],
-      complemento:  [null],
-      rua:  ['323', Validators.required],
+      cargo: [null],
+      endereco: this.formBuilder.group({
+        cep: ['49042570', Validators.required],
+        numero: [42, Validators.required],
+        estado: ['SE', Validators.required],
+        complemento: [null],
+        rua: ['323', Validators.required],
+      }),
     });
-    console.log(this.form);
+
+    const cargo = {nome: 'Dev', nivel: 'Pleno', desc: 'Dev Pleno'};
+    this.form.get('cargo')?.setValue(cargo);
+
   }
   submit() {
     let valueSubmit = Object.assign({}, this.form.value);
@@ -52,5 +85,28 @@ export class DataDrivenComponent implements OnInit {
 
   cancelar() {
     this.form.reset();
+  }
+
+  public compararCargos(obj1: Cargo, obj2: Cargo) {
+    return obj1 && obj2 ? obj1.nivel == obj2.nivel : obj1 === obj2;
+  }
+
+  public consultaCEP() {
+    const { endereco } = this.form.value;
+
+    this.cepService.getEndereco(endereco.cep).subscribe((dados) => {
+      const endereco: Endereco = JSON.parse(JSON.stringify(dados));
+      this.populaDadosForm(endereco);
+    });
+  }
+
+  populaDadosForm(dados: Endereco) {
+    this.form.patchValue({
+      endereco: {
+        cep: dados.cep,
+        complemento: dados.complemento,
+        rua: dados.logradouro,
+      },
+    });
   }
 }
