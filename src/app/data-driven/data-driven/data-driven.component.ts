@@ -3,6 +3,7 @@ import { ThrowStmt } from '@angular/compiler';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   Form,
+  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -14,6 +15,7 @@ import { Endereco } from 'src/app/models/endereco/endereco';
 import { Estado } from 'src/app/models/estado/estado.model';
 import { CepService } from 'src/app/services/cep.service';
 import { DropdownService } from 'src/app/services/dropdown.service';
+import { requiredMinCheckbox } from 'src/app/utils/validators';
 
 @Component({
   selector: 'app-data-driven',
@@ -34,23 +36,16 @@ export class DataDrivenComponent implements OnInit, OnDestroy {
   form: FormGroup;
   estados: Observable<Estado[]>;
   cargos: Observable<Cargo[]>;
+  newsLetterOp: Observable<any[]>;
+  frameworks: string[];
 
-  ngOnInit(): void {
-    /*
-    this.form = new FormGroup({
-      nome: new FormControl(null),
-      email: new FormControl(null),
-    });
-    */
-
+  ngOnInit() {
     this.estados = this.cepService.getEstados();
     this.cargos = this.dropDownService.getCargos();
+    this.newsLetterOp = this.dropDownService.getNewsLetterOp();
+    this.frameworks = this.dropDownService.getFrameworks();
 
-    /*
-    this.cepService
-      .getEstados()
-      .subscribe((dados: Estado[]) => this.estados = dados);
-      */
+
 
     this.form = this.formBuilder.group({
       nome: ['Saulo', Validators.required],
@@ -63,29 +58,26 @@ export class DataDrivenComponent implements OnInit, OnDestroy {
         complemento: [null],
         rua: ['323', Validators.required],
       }),
+      newsletter: [null],
+      termos: [null, Validators.requiredTrue],
+      frameworks: this.buildFramework(),
     });
 
-    const cargo = {nome: 'Dev', nivel: 'Pleno', desc: 'Dev Pleno'};
+    const cargo = { nome: 'Dev', nivel: 'Pleno', desc: 'Dev Pleno' };
     this.form.get('cargo')?.setValue(cargo);
-
-  }
-  submit() {
-    let valueSubmit = Object.assign({}, this.form.value);
-
-    this.http
-      .post('https://httpbin.org/post', JSON.stringify(valueSubmit))
-      .subscribe(
-        (dados) => {
-          console.log(dados);
-          //    this.form.reset();
-        },
-        (error: any) => alert('erro')
-      );
   }
 
-  cancelar() {
-    this.form.reset();
+  buildFramework() {
+
+    const values = this.frameworks.map((v) => new FormControl(null));
+    return this.formBuilder.array(values, requiredMinCheckbox(1));
   }
+
+
+  getFrameworksControls() {
+    return this.form.get('frameworks') ? (<FormArray>this.form.get('frameworks')).controls : null;
+  }
+
 
   public compararCargos(obj1: Cargo, obj2: Cargo) {
     return obj1 && obj2 ? obj1.nivel == obj2.nivel : obj1 === obj2;
@@ -108,5 +100,32 @@ export class DataDrivenComponent implements OnInit, OnDestroy {
         rua: dados.logradouro,
       },
     });
+  }
+
+  get frameworkFormGroups () {
+
+    const values = (this.form.get('frameworks')) as FormArray;
+
+    return values;
+
+  }
+
+
+  submit() {
+    let valueSubmit = Object.assign({}, this.form.value);
+
+    this.http
+      .post('https://httpbin.org/post', JSON.stringify(valueSubmit))
+      .subscribe(
+        (dados) => {
+          console.log(dados);
+          //    this.form.reset();
+        },
+        (error: any) => alert('erro')
+      );
+  }
+
+  cancelar() {
+    this.form.reset();
   }
 }
