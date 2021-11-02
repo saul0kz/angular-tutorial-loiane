@@ -15,7 +15,7 @@ import { Endereco } from 'src/app/models/endereco/endereco';
 import { Estado } from 'src/app/models/estado/estado.model';
 import { CepService } from 'src/app/services/cep.service';
 import { DropdownService } from 'src/app/services/dropdown.service';
-import { requiredMinCheckbox } from 'src/app/utils/validators';
+import { CustomValidadors } from 'src/app/utils/validators';
 
 @Component({
   selector: 'app-data-driven',
@@ -45,8 +45,6 @@ export class DataDrivenComponent implements OnInit, OnDestroy {
     this.newsLetterOp = this.dropDownService.getNewsLetterOp();
     this.frameworks = this.dropDownService.getFrameworks();
 
-
-
     this.form = this.formBuilder.group({
       nome: ['Saulo', Validators.required],
       email: ['saul0kz@gmail.com', [Validators.required, Validators.email]],
@@ -68,16 +66,18 @@ export class DataDrivenComponent implements OnInit, OnDestroy {
   }
 
   buildFramework() {
-
     const values = this.frameworks.map((v) => new FormControl(null));
-    return this.formBuilder.array(values, requiredMinCheckbox(1));
+    return this.formBuilder.array(
+      values,
+      CustomValidadors.requiredMinCheckbox(1)
+    );
   }
-
 
   getFrameworksControls() {
-    return this.form.get('frameworks') ? (<FormArray>this.form.get('frameworks')).controls : null;
+    return this.form.get('frameworks')
+      ? (<FormArray>this.form.get('frameworks')).controls
+      : null;
   }
-
 
   public compararCargos(obj1: Cargo, obj2: Cargo) {
     return obj1 && obj2 ? obj1.nivel == obj2.nivel : obj1 === obj2;
@@ -102,14 +102,11 @@ export class DataDrivenComponent implements OnInit, OnDestroy {
     });
   }
 
-  get frameworkFormGroups () {
-
-    const values = (this.form.get('frameworks')) as FormArray;
+  get frameworkFormGroups() {
+    const values = this.form.get('frameworks') as FormArray;
 
     return values;
-
   }
-
 
   submit() {
     let valueSubmit = Object.assign({}, this.form.value);
