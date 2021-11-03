@@ -22,6 +22,19 @@
         placeholder="email"
       />
     </div>
+    <div class="form-group">
+      <label for="email">confirmar email</label>
+      <input
+        type="email"
+        class="form-control"
+        formControlName="confirmarEmail"
+        id="confirmarEmail"
+        placeholder="email"
+      />
+      <div *ngIf="form.controls.confirmarEmail.errors">
+        {{ form.controls.confirmarEmail.errors | json }}
+      </div>
+    </div>
     <div class="row">
       <div class="col-sm-6">
         <label for="nome">Cargo:</label>
@@ -55,7 +68,12 @@
             formControlName="cep"
             (blur)="consultaCEP()"
           />
+
         </div>
+
+        <div *ngIf="cepControl">
+          <div *ngIf="cepControl.errors">erro </div>
+      </div>
         <div class="col">
           <label for="nome">Rua:</label>
           <input

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
+  AbstractControl,
   Form,
   FormArray,
   FormBuilder,
@@ -15,7 +16,8 @@ import { Endereco } from 'src/app/models/endereco/endereco';
 import { Estado } from 'src/app/models/estado/estado.model';
 import { CepService } from 'src/app/services/cep.service';
 import { DropdownService } from 'src/app/services/dropdown.service';
-import { CustomValidadors } from 'src/app/utils/validators';
+import { CustomValidators } from 'src/app/utils/validators';
+import { VerificaEmailServiceService } from './services/verifica-email-service.service';
 
 @Component({
   selector: 'app-data-driven',
@@ -27,7 +29,8 @@ export class DataDrivenComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private cepService: CepService,
-    private dropDownService: DropdownService
+    private dropDownService: DropdownService,
+    private verificaEmailService: VerificaEmailServiceService,
   ) {}
   ngOnDestroy(): void {
     this.cepService.getEstados();
@@ -40,6 +43,8 @@ export class DataDrivenComponent implements OnInit, OnDestroy {
   frameworks: string[];
 
   ngOnInit() {
+    this.verificaEmailService.verificarEmail('').subscribe();
+
     this.estados = this.cepService.getEstados();
     this.cargos = this.dropDownService.getCargos();
     this.newsLetterOp = this.dropDownService.getNewsLetterOp();
@@ -48,9 +53,10 @@ export class DataDrivenComponent implements OnInit, OnDestroy {
     this.form = this.formBuilder.group({
       nome: ['Saulo', Validators.required],
       email: ['saul0kz@gmail.com', [Validators.required, Validators.email]],
+      confirmarEmail: [, [CustomValidators.equalsTo('email')]],
       cargo: [null],
       endereco: this.formBuilder.group({
-        cep: ['49042570', Validators.required],
+        cep: ['49042570', [Validators.required, Validators.minLength(8)] ],
         numero: [42, Validators.required],
         estado: ['SE', Validators.required],
         complemento: [null],
@@ -69,7 +75,7 @@ export class DataDrivenComponent implements OnInit, OnDestroy {
     const values = this.frameworks.map((v) => new FormControl(null));
     return this.formBuilder.array(
       values,
-      CustomValidadors.requiredMinCheckbox(1)
+      CustomValidators.requiredMinCheckbox(1)
     );
   }
 
@@ -77,6 +83,10 @@ export class DataDrivenComponent implements OnInit, OnDestroy {
     return this.form.get('frameworks')
       ? (<FormArray>this.form.get('frameworks')).controls
       : null;
+  }
+  get cepControl() {
+    const endereco = this.form.get('endereco');
+    return endereco?.get('cep');
   }
 
   public compararCargos(obj1: Cargo, obj2: Cargo) {
